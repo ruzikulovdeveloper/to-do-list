@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+
+        * {
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        body {
+            margin: 10% 15% ;
+            min-width: 250px;
+            background-color: rgb(19, 7, 36);
+        }
+
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul li {
+            cursor: pointer;
+            position: relative;
+            padding: 12px 8px 12px 40px;
+            list-style-type: none;
+            border: 0.5px solid rgb(87, 87, 87);
+            font-size: 18px;
+            transition: 0.2s;
+            margin: 9px 0;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgb(70, 66, 66);
+        }
+
+        ul li{
+            background: #f9f9f9;
+        }   
+
+        ul li:hover {
+            background: rgb(255, 255, 255);
+            box-shadow: 1px 1px 19px black;
+        }
+
+        ul li.checked {
+            background: rgb(95, 95, 95);
+            color: #fff;
+            text-decoration: line-through;
+        }
+
+        ul li.checked::before {
+            content: '';
+            position: absolute;
+            border-color: #fff;
+            border-style: solid;
+            border-width: 0 2px 2px 0;
+            top: 10px;
+            left: 16px;
+            transform: rotate(45deg);
+            height: 15px;
+            width: 7px;
+        }
+
+        .close {
+            position: absolute;
+            right: 0;
+            top: 0;
+            padding: 12px 16px 12px 16px;
+            border-radius: 700px;
+        }
+
+        .close:hover {
+            background-color: #db271a;
+            color: white;
+        }
+
+        .header {
+            background-color: #59208f;
+            padding: 35px 45px;
+            border-radius: 11px;
+            color: white;
+            text-align: center;
+            box-shadow: 0 0 20px black;
+            margin: 10px 0;
+        }
+
+        .header:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        input {
+            margin: 0;
+            border: 1px;
+            border-top-left-radius:  14px;
+            width: 73%;
+            padding: 10px;
+            float: left;
+            font-size: 16px;
+        }
+
+        .addBtn {
+            padding: 10px;
+            width: 25%;
+            background: #a7a4a4;
+            color: #555;
+            float: left;
+            text-align: center;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: 0.3s;
+            border-bottom-right-radius: 14px;
+        }
+
+        .addBtn:hover {
+            background-color: rgb(73, 72, 72);
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div id="myDIV" class="header">
+        <h2 style="margin:5px; display: block!important;">Salom!<br> Marhamat matn kiriting</h2>
+        <br>
+
+        <input type="text" id="myInput" placeholder="Title...">
+
+        <span onclick="newElement()" class="addBtn">Qo'shish</span>
+    </div>
+
+    <ul id="myUL">
+        <li>Lorem ipsum 1</li>
+    </ul>
+
+    <script>
+        // Создаем кнопку "закрыть" и добавляем ее к каждому элементу списка
+        let myNodelist = document.getElementsByTagName("LI");
+        let i;
+        for (i = 0; i < myNodelist.length; i++) {
+        let span = document.createElement("SPAN");
+        let txt = document.createTextNode("\u00D7");
+        span.className = "close";
+        span.appendChild(txt);
+        myNodelist[i].appendChild(span);
+        }
+
+        // Нажмите кнопку закрытия, чтобы скрыть текущий элемент списка
+        let close = document.getElementsByClassName("close");
+        let i;
+        for (i = 0; i < close.length; i++) {
+        close[i].onclick = function() {
+            var div = this.parentElement;
+            div.style.display = "none";
+        }
+        }
+
+        // Добавляем символ "галочка" при нажатии на элемент списка
+        let list = document.querySelector('ul');
+        list.addEventListener('click', function(ev) {
+        if (ev.target.tagName === 'LI') {
+            ev.target.classList.toggle('checked');
+        }
+        }, false);
+
+        // Создаем новый элемент списка при нажатии на кнопку "Добавить"
+        function newElement() {
+        let li = document.createElement("li");
+        let inputValue = document.getElementById("myInput").value;
+        var t = document.createTextNode(inputValue);
+        li.appendChild(t);
+        if (inputValue === '') {
+            alert("Qiymat kiritilmagan !");
+        } else {
+            document.getElementById("myUL").appendChild(li);
+        }
+        document.getElementById("myInput").value = "";
+
+        let span = document.createElement("SPAN");
+        let txt = document.createTextNode("\u00D7");
+        span.className = "close";
+        span.appendChild(txt);
+        li.appendChild(span);
+
+        for (i = 0; i < close.length; i++) {
+            close[i].onclick = function() {
+            let div = this.parentElement;
+            div.style.display = "none";
+            }
+        }
+        }
+    </script>
+</body>
+</html>
+<!-- yaratuvchi R.D. -->
